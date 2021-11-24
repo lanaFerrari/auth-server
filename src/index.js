@@ -4,6 +4,8 @@ const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
 
+const usersRouter = require("./resources/users/router");
+
 const app = express();
 
 /* SETUP MIDDLEWARE */
@@ -14,8 +16,6 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
-
-const usersRouter = require("./resources/users/router");
 
 /* SETUP ROUTES */
 
