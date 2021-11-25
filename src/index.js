@@ -5,6 +5,7 @@ const cors = require("cors");
 const morgan = require("morgan");
 
 const usersRouter = require("./resources/users/router");
+const loginForm = require("./resources/loginForm/router");
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use(morgan("dev"));
 /* SETUP ROUTES */
 
 app.use("/users", usersRouter);
+app.use("/login", loginForm);
 
 app.get("*", (req, res) => {
   res.json({ ok: true });
