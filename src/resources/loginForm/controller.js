@@ -3,7 +3,6 @@ const prisma = require("../../utils/dbClient");
 async function checkUser(req, res) {
   const { email, password: passwordFromRequest } = req.body;
   //Another way of saying: const passwordFromRequest = req.body.password
-  console.log("BODY", req.body);
 
   try {
     const user = await prisma.user.findUnique({
