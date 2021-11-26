@@ -1,10 +1,11 @@
 const prisma = require("../../utils/dbClient");
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const { token } = require("morgan");
+const { createToken } = require("../../utils/authentication");
 
 const createUser = async (req, res) => {
   const { email, password } = req.body;
+
+  console.log("BODY", req.body);
 
   const incriptedPassword = await bcrypt.hash(password, 8);
 
@@ -14,22 +15,13 @@ const createUser = async (req, res) => {
         email,
         password: incriptedPassword,
       },
+      select: {
+        id: true,
+        email: true,
+      },
     });
 
-    // createToken
-    // - input: an object that represents a user
-    // - output: a string that represents a json web token
-
-    const createToken = (result) => {
-      const token = jwt.sign({ ...result }, process.env.JWT_SECRET, {
-        expiresIn: "8h",
-      });
-
-      return token;
-    };
-
     const token = createToken(result);
-    console.log("Token", token);
 
     res.status(201).json(token);
   } catch (error) {
