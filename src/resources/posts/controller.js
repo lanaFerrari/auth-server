@@ -1,12 +1,14 @@
 const dbClient = require("../../utils/dbClient");
 const prisma = dbClient;
+const jwt = require("jsonwebtoken");
 
 const getAllPosts = async (req, res) => {
   console.log({ authorization: req.headers.authorization });
 
   const token = req.headers.authorization;
+  const secretKey = process.env.JWT_SECRET;
 
-  jwt.verify(token, process.env.JWT_SECRET, async (err, payload) => {
+  jwt.verify(token, secretKey, async (err, payload) => {
     if (err) {
       throw Error("Not Authorized");
     }
