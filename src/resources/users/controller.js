@@ -5,8 +5,6 @@ const { createToken } = require("../../utils/authentication");
 const createUser = async (req, res) => {
   const { email, password } = req.body;
 
-  console.log("BODY", req.body);
-
   const incriptedPassword = await bcrypt.hash(password, 8);
 
   try {
