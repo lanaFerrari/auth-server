@@ -6,6 +6,7 @@ const morgan = require("morgan");
 
 const usersRouter = require("./resources/users/router");
 const loginForm = require("./resources/loginForm/router");
+const postsRouter = require("../src/resources/posts/router");
 
 const app = express();
 
@@ -22,6 +23,7 @@ app.use(morgan("dev"));
 
 app.use("/users", usersRouter);
 app.use("/login", loginForm);
+app.use("/posts", postsRouter);
 
 app.get("*", (req, res) => {
   res.json({ ok: true });

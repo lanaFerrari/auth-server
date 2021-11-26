@@ -5,6 +5,7 @@ const { createToken } = require("../../utils/authentication");
 async function checkUser(req, res) {
   const { email, password: passwordFromRequest } = req.body;
   //Another way of saying: const passwordFromRequest = req.body.password
+  console.log("BODY", req.body);
 
   if (!email || !passwordFromRequest) {
     res.status(400).json({ error: "Email or Password missing" });
@@ -16,6 +17,8 @@ async function checkUser(req, res) {
         email,
       },
     });
+
+    console.log("FOUND", foundUser);
 
     if (!foundUser) {
       res.status(401).json({ message: "Not Authorized" });
